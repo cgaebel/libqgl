@@ -51,8 +51,9 @@ dnl current:revision:age
 LT_VERSION="1:0:0"
 AC_SUBST(LT_VERSION)
 
-AC_CONFIG_FILES([
+AC_CONFIG_FILES([    
     Makefile
+    libqgl.pc
     src/Makefile
 ])
 

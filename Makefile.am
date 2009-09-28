@@ -20,4 +20,7 @@
 
 SUBDIRS = src
 
-EXTRA_DIST = COPYING.txt README.txt
+EXTRA_DIST = COPYING.txt README.txt libqgl.pc.in
+
+pkgconfigdir   = $(libdir)/pkgconfig
+pkgconfig_DATA = libqgl.pc
