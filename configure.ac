@@ -24,6 +24,7 @@ AM_INIT_AUTOMAKE(foreign)
 AC_LANG([C++])
 AC_PROG_CXX
 AC_PROG_LIBTOOL
+AC_LIBTOOL_WIN32_DLL
 
 dnl current
 dnl     The most recent interface number that this library implements.
@@ -48,12 +49,13 @@ dnl 6. If any interfaces have been removed since the last public release,
 dnl    then set age to 0. 
 
 dnl current:revision:age
-LT_VERSION="1:0:0"
+LT_VERSION="0:0:0"
 AC_SUBST(LT_VERSION)
 
 AC_CONFIG_FILES([    
     Makefile
     libqgl.pc
+    include/Makefile
     src/Makefile
 ])
 

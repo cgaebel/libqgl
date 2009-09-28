@@ -20,10 +20,10 @@
 
 lib_LTLIBRARIES = libqgl.la
 
-libqgl_la_CXXFLAGS = -I$(top_srcdir)/include/qgl -DBUILD_QGL
+INCLUDES = -I$(top_srcdir)/include/qgl -DBUILD_QGL
 
 libqgl_la_LIBADD =
 
-libqgl_la_LDFLAGS = -version-info @LT_VERSION@
+libqgl_la_LDFLAGS = -no-undefined -version-info @LT_VERSION@
 
 libqgl_la_SOURCES = Engine.cpp

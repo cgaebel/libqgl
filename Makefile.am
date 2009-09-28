@@ -18,7 +18,7 @@
 ## along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 ##
 
-SUBDIRS = src
+SUBDIRS = include src
 
 EXTRA_DIST = COPYING.txt README.txt libqgl.pc.in
 
