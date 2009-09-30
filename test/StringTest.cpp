@@ -18,16 +18,15 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef _QGL_DEFINES_H_
-#define _QGL_DEFINES_H_
+#include <UnitTest++/UnitTest++.h>
 
-// TODO if WIN32
-/*#ifdef BUILD_QGL
-    #define QGL_EXPORT __declspec(dllexport)
-#else
-    #define QGL_EXPORT __declspec(dllimport)
-#endif*/
+#include "string_utils.h"
 
-#define QGL_EXPORT __declspec(dllexport)
-
-#endif
+SUITE(StringTest)
+{
+//------------------------------------------------------------------------------
+    TEST(compose)
+    {        
+        CHECK_EQUAL("you have the force!", qgl::compose("%2 %3 %0 %1!", "the", "force", "you", "have"));
+    }
+}

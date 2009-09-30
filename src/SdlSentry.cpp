@@ -18,16 +18,35 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef _QGL_DEFINES_H_
-#define _QGL_DEFINES_H_
+#include "SdlSentry.h"
 
-// TODO if WIN32
-/*#ifdef BUILD_QGL
-    #define QGL_EXPORT __declspec(dllexport)
-#else
-    #define QGL_EXPORT __declspec(dllimport)
-#endif*/
+#include <stdexcept>
+#include <SDL.h>
 
-#define QGL_EXPORT __declspec(dllexport)
+namespace qgl
+{
+    unsigned int SdlSentry::use_count = 0;
 
-#endif
+//------------------------------------------------------------------------------
+    SdlSentry::SdlSentry()
+    {
+        if (use_count == 0)
+        {
+            if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+            {
+                throw std::runtime_error(SDL_GetError());
+            }
+        }
+        use_count++;
+    }
+        
+//------------------------------------------------------------------------------
+    SdlSentry::~SdlSentry()
+    {
+        use_count--;
+        if (use_count == 0)
+        {
+            SDL_Quit();
+        }
+    }
+}

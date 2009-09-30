@@ -20,10 +20,10 @@
 
 lib_LTLIBRARIES = libqgl.la
 
-INCLUDES = -I$(top_srcdir)/include/qgl -DBUILD_QGL
+INCLUDES = -I$(top_srcdir)/include/qgl -DBUILD_QGL @SDL_CFLAGS@
 
-libqgl_la_LIBADD =
+libqgl_la_LIBADD = @SDL_LIBS@
 
-libqgl_la_LDFLAGS = -no-undefined -version-info @LT_VERSION@
+libqgl_la_LDFLAGS = -version-info @LT_VERSION@
 
-libqgl_la_SOURCES = Engine.cpp
+libqgl_la_SOURCES = debug.cpp math_utils.cpp Engine.cpp Window.cpp SdlSentry.cpp

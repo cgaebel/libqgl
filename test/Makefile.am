@@ -2,7 +2,7 @@
 ## libqgl - The quick game library
 ## Copyright 2009 Sean Farell
 ##
-## This file is part of libqgl.
+## This file is part of libqgl. 
 ##
 ## libqgl is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU Lesser General Public License as published by
@@ -23,11 +23,10 @@ check_PROGRAMS = unittests
 ## We use include/qgl instead of only include to enshure that we include
 ## the headers from our package and not those that are installed.
 
-INCLUDES = -I$(top_srcdir)/include/qgl
+INCLUDES = -I$(top_srcdir)/include/qgl @SDL_CFLAGS@
 
-unittests_LDADD = $(top_builddir)/src/libqgl.la @UT_LIBS@
+unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @UT_LIBS@
 
-unittests_SOURCES = main.cpp
+unittests_SOURCES = main.cpp WindowTest.cpp StringTest.cpp
 
-check-local : unittests
-	./unittests
+TESTS = unittests

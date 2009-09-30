@@ -20,11 +20,30 @@
 
 #include <UnitTest++/UnitTest++.h>
 
-#include "main.h"
-#include "debug.h"
+#include "Window.h"
 
-int main(int argc, char* argv[])
+SUITE(WindowTest)
 {
-    qgl::set_log_level(qgl::DETAILS);
-    return UnitTest::RunAllTests();
+//------------------------------------------------------------------------------
+    TEST(initial_size)
+    {
+        qgl::Window window;
+        CHECK_EQUAL(qgl::Vector2ui(800, 600), window.get_size());
+    }
+    
+//------------------------------------------------------------------------------
+    TEST(initial_is_windowed)
+    {
+        qgl::Window window;
+        CHECK(!window.is_fullscreen());
+    }
+    
+//------------------------------------------------------------------------------
+    TEST(set_video_mode)
+    {
+        qgl::Window window;
+        window.set_video_mode(qgl::Vector2ui(1280, 1024), true);
+        CHECK_EQUAL(qgl::Vector2ui(1280, 1024), window.get_size());
+        CHECK(window.is_fullscreen());
+    }
 }

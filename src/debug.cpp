@@ -18,16 +18,26 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef _QGL_DEFINES_H_
-#define _QGL_DEFINES_H_
+#include "debug.h"
 
-// TODO if WIN32
-/*#ifdef BUILD_QGL
-    #define QGL_EXPORT __declspec(dllexport)
-#else
-    #define QGL_EXPORT __declspec(dllimport)
-#endif*/
+#include <iostream>
 
-#define QGL_EXPORT __declspec(dllexport)
-
-#endif
+namespace qgl
+{
+    LogLevel log_level = WARNING;
+    
+//------------------------------------------------------------------------------    
+    void set_log_level(LogLevel level)
+    {
+        log_level = level;
+    }
+    
+//------------------------------------------------------------------------------    
+    void log_message(LogLevel level, const std::string& func, const std::string& msg)
+    {
+        if (level >= log_level)
+        {
+            std::cout << func << ": " << msg << std::endl;
+        }
+    }
+} 

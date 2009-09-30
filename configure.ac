@@ -23,8 +23,9 @@ AM_INIT_AUTOMAKE(foreign)
 
 AC_LANG([C++])
 AC_PROG_CXX
-AC_PROG_LIBTOOL
+
 AC_LIBTOOL_WIN32_DLL
+AC_PROG_LIBTOOL
 
 dnl current
 dnl     The most recent interface number that this library implements.
@@ -52,10 +53,17 @@ dnl current:revision:age
 LT_VERSION="0:0:0"
 AC_SUBST(LT_VERSION)
 
+dnl Check for SDL
+
+SDL_VERSION=1.2.0
+AM_PATH_SDL($SDL_VERSION, :, AC_MSG_ERROR([SDL version $SDL_VERSION not found!]))
+AC_SUBST(SDL_CFLAGS)
+AC_SUBST(SDL_LIBS)
+
 dnl Check for UnitTest++
 
-AC_CHECK_LIB(UnitTest++, main, :, AC_MSG_WARN([No UnitTest++ library.]))
-AC_CHECK_HEADER([UnitTest++/UnitTest++.h], :, AC_MSG_WARN([No <UnitTest++/UnitTest++.h>.]))
+AC_CHECK_LIB(UnitTest++, main, :, AC_MSG_WARN([UnitTest++ library not found.]))
+AC_CHECK_HEADER([UnitTest++/UnitTest++.h], :, AC_MSG_WARN([<UnitTest++/UnitTest++.h> header not found.]))
 
 UT_LIBS="-lUnitTest++"
 AC_SUBST(UT_LIBS)

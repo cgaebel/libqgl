@@ -20,4 +20,10 @@
 
 nobase_include_HEADERS = \
     qgl/defines.h \
-    qgl/Engine.h
+    qgl/main.h \
+    qgl/debug.h \
+    qgl/math_utils.h \
+    qgl/Vector.h \
+    qgl/Engine.h \
+    qgl/SdlSentry.h \
+    qgl/Window.h

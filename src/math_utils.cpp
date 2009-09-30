@@ -18,16 +18,23 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef _QGL_DEFINES_H_
-#define _QGL_DEFINES_H_
+#include "math_utils.h"
 
-// TODO if WIN32
-/*#ifdef BUILD_QGL
-    #define QGL_EXPORT __declspec(dllexport)
-#else
-    #define QGL_EXPORT __declspec(dllimport)
-#endif*/
+#include <cmath>
 
-#define QGL_EXPORT __declspec(dllexport)
+namespace qgl
+{
+//------------------------------------------------------------------------------
+    template <>
+    bool equals(float a, float b)
+    {
+        return std::abs(a - b) < 1e-4f;
+    }
 
-#endif
+//------------------------------------------------------------------------------    
+    template <>
+    bool equals(double a, double b)
+    {
+        return std::abs(a - b) < 1e-6f;
+    }
+}
