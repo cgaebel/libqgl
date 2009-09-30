@@ -46,4 +46,12 @@ SUITE(WindowTest)
         CHECK_EQUAL(qgl::Vector2ui(1280, 1024), window.get_size());
         CHECK(window.is_fullscreen());
     }
+    
+//------------------------------------------------------------------------------    
+    TEST(set_title)
+    {
+        qgl::Window window;
+        window.set_title("Mu ha ha ha!");
+        CHECK_EQUAL("Mu ha ha ha!", window.get_title());
+    }
 }

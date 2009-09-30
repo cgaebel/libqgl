@@ -66,4 +66,18 @@ namespace qgl
             throw std::runtime_error(msg);
         }
     }
+    
+//------------------------------------------------------------------------------
+    void Window::set_title(const std::string& value)
+    {
+        SDL_WM_SetCaption(value.c_str(), value.c_str());
+    }
+        
+//------------------------------------------------------------------------------
+    std::string Window::get_title() const
+    {
+        char *title;
+        SDL_WM_GetCaption(&title, NULL);
+        return title;
+    }
 }

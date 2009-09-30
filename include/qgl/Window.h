@@ -53,6 +53,16 @@ namespace qgl
          * Set the video mode.
          **/
         void set_video_mode(const Vector2ui& size, bool fullscreen);
+        
+        /**
+         * Set title.
+         **/
+        void set_title(const std::string& value);
+        
+        /**
+         * Get the window title.
+         **/
+        std::string get_title() const;
     
     private:
         SdlSentry sdl_sentry;
