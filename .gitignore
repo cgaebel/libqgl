@@ -19,3 +19,4 @@ libtool
 ltmain.sh
 missing
 mkinstalldirs
+test/unittests
