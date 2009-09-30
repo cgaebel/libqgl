@@ -52,11 +52,23 @@ dnl current:revision:age
 LT_VERSION="0:0:0"
 AC_SUBST(LT_VERSION)
 
+dnl Check for UnitTest++
+
+AC_CHECK_LIB(UnitTest++, main, :, AC_MSG_WARN([No UnitTest++ library.]))
+AC_CHECK_HEADER([UnitTest++/UnitTest++.h], :, AC_MSG_WARN([No <UnitTest++/UnitTest++.h>.]))
+
+UT_LIBS="-lUnitTest++"
+AC_SUBST(UT_LIBS)
+
+
+dnl Output
+
 AC_CONFIG_FILES([    
     Makefile
     libqgl.pc
     include/Makefile
     src/Makefile
+    test/Makefile
 ])
 
 AC_OUTPUT

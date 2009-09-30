@@ -18,9 +18,16 @@
 ## along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 ##
 
-SUBDIRS = include src test
+check_PROGRAMS = unittests
 
-EXTRA_DIST = COPYING.txt README.txt libqgl.pc.in
+## We use include/qgl instead of only include to enshure that we include
+## the headers from our package and not those that are installed.
 
-pkgconfigdir   = $(libdir)/pkgconfig
-pkgconfig_DATA = libqgl.pc
+INCLUDES = -I$(top_srcdir)/include/qgl
+
+unittests_LDADD = $(top_builddir)/src/libqgl.la @UT_LIBS@
+
+unittests_SOURCES = main.cpp
+
+check-local : unittests
+	./unittests
