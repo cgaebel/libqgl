@@ -80,4 +80,10 @@ namespace qgl
         SDL_WM_GetCaption(&title, NULL);
         return title;
     }
+
+//------------------------------------------------------------------------------	
+	void GraphicSystem::refresh_screen()
+	{
+	
+	}
 }

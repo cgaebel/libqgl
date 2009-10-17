@@ -25,6 +25,9 @@
 
 namespace qgl
 {
+	class GraphicSystem;
+	class InputSystem;
+
     /**
      * Engine
      * 
@@ -58,10 +61,26 @@ namespace qgl
          * Check if the engine is running.
          **/
         bool is_running() const;
-        
+		
+		/**
+		 * Get the graphic system.
+		 **/
+		GraphicSystem& get_graphic_system();
+		
+		/**
+		 * Get the input system.
+		 **/
+		InputSystem& get_input_system();
+	
+	protected:
+		virtual void on_quit();
+		
     private:
         bool running;
-        
+		
+		GraphicSystem* graphic_system;
+		InputSystem* input_system;        
+		
         // prevent implicit copy
         Engine(const Engine&);
         const Engine& operator = (const Engine&);

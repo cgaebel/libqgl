@@ -63,6 +63,11 @@ namespace qgl
          * Get the GraphicSystem title.
          **/
         std::string get_title() const;
+		
+		/**
+		 * Refresh the screen.
+		 **/
+		void refresh_screen();
     
     private:
         SdlSentry sdl_sentry;

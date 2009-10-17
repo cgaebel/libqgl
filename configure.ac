@@ -60,6 +60,10 @@ AM_PATH_SDL($SDL_VERSION, :, AC_MSG_ERROR([SDL version $SDL_VERSION not found!])
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(SDL_LIBS)
 
+PKG_CHECK_MODULES(SIGC, [sigc++-2.0], :, AC_MSG_ERROR([sigc++ not found!]))
+AC_SUBST(SIGC_CFLAGS)
+AC_SUBST(SIGC_LIBS)
+
 dnl Check for UnitTest++
 
 AC_CHECK_LIB(UnitTest++, main, :, AC_MSG_WARN([UnitTest++ library not found.]))

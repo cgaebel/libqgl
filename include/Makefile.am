@@ -28,4 +28,5 @@ qgl_include_HEADERS = \
     Vector.h \
     Engine.h \
     SdlSentry.h \
-    GraphicSystem.h
+    GraphicSystem.h \
+	InputSystem.h

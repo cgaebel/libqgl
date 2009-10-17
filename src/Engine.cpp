@@ -20,14 +20,28 @@
 
 #include "Engine.h"
 
+#include "GraphicSystem.h"
+#include "InputSystem.h"
+
 namespace qgl
 {
 //-----------------------------------------------------------------------------
     Engine::Engine()
-    : running(false) {}
+    : running(false),
+	  graphic_system(NULL), input_system(NULL)
+	{
+		graphic_system = new GraphicSystem;
+		input_system = new InputSystem;
+		
+		input_system->get_quit_signal().connect(sigc::mem_fun(this, &Engine::on_quit));
+	}
         
 //-----------------------------------------------------------------------------
-    Engine::~Engine() {}
+    Engine::~Engine()
+	{
+		delete input_system;
+		delete graphic_system;
+	}
     
 //-----------------------------------------------------------------------------        
     void Engine::run()
@@ -35,9 +49,14 @@ namespace qgl
         running = true;
         while (running)
         {
-            // handle input
-            // compute simulation
-            // draw scene
+            if (input_system != NULL)
+				input_system->process_input();
+			
+			// compute simulation
+			
+			if (graphic_system != NULL)
+				graphic_system->refresh_screen();
+            
             // whait on next frame
         }
     }
@@ -53,4 +72,24 @@ namespace qgl
     {
         return running;
     }
+	
+//-----------------------------------------------------------------------------
+	GraphicSystem& Engine::get_graphic_system()
+	{
+		QGL_ASSERT(graphic_system != NULL);
+		return *graphic_system;
+	}
+	
+//-----------------------------------------------------------------------------
+	InputSystem& Engine::get_input_system()
+	{
+		QGL_ASSERT(input_system != NULL);
+		return *input_system;
+	}
+	
+//-----------------------------------------------------------------------------
+	void Engine::on_quit()
+	{
+		stop();
+	}		
 }
