@@ -20,7 +20,7 @@
 
 lib_LTLIBRARIES = libqgl.la
 
-INCLUDES = -I$(top_srcdir)/include/qgl -DBUILD_QGL @SDL_CFLAGS@
+INCLUDES = -I$(top_srcdir)/include -DBUILD_QGL @SDL_CFLAGS@
 
 libqgl_la_LIBADD = @SDL_LIBS@
 

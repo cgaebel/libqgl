@@ -19,11 +19,11 @@
 ##
 
 nobase_include_HEADERS = \
-    qgl/defines.h \
-    qgl/main.h \
-    qgl/debug.h \
-    qgl/math_utils.h \
-    qgl/Vector.h \
-    qgl/Engine.h \
-    qgl/SdlSentry.h \
-    qgl/GraphicSystem.h
+    defines.h \
+	main.h \
+    debug.h \
+    math_utils.h \
+    Vector.h \
+    Engine.h \
+    SdlSentry.h \
+    GraphicSystem.h
