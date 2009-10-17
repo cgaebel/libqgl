@@ -18,7 +18,9 @@
 ## along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 ##
 
-nobase_include_HEADERS = \
+qgl_includedir = $(includedir)/qgl
+
+qgl_include_HEADERS = \
     defines.h \
 	main.h \
     debug.h \
