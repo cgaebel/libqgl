@@ -26,4 +26,4 @@ nobase_include_HEADERS = \
     qgl/Vector.h \
     qgl/Engine.h \
     qgl/SdlSentry.h \
-    qgl/Window.h
+    qgl/GraphicSystem.h

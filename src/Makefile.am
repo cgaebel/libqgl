@@ -26,4 +26,4 @@ libqgl_la_LIBADD = @SDL_LIBS@
 
 libqgl_la_LDFLAGS = -version-info @LT_VERSION@
 
-libqgl_la_SOURCES = debug.cpp math_utils.cpp Engine.cpp Window.cpp SdlSentry.cpp
+libqgl_la_SOURCES = debug.cpp math_utils.cpp Engine.cpp GraphicSystem.cpp SdlSentry.cpp

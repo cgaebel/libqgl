@@ -18,8 +18,8 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef _QGL_WINDOW_H_
-#define _QGL_WINDOW_H_
+#ifndef _QGL_GRAPHICSYSTEM_H_
+#define _QGL_GRAPHICSYSTEM_H_
 
 #include "defines.h"
 #include "Vector.h"
@@ -28,24 +28,24 @@
 namespace qgl
 {
     /**
-     * System Window
+     * Graphic System
      *
      **/
-    class QGL_EXPORT Window
+    class QGL_EXPORT GraphicSystem
     {
     public:
         /**
          * Default Constructor
          **/
-        Window();
+        GraphicSystem();
         
         /**
-         * Get the window size.
+         * Get the GraphicSystem size.
          **/
         Vector2ui get_size() const;
         
         /**
-         * Check if the window is fullscreen
+         * Check if the GraphicSystem is fullscreen
          **/
         bool is_fullscreen() const;
         
@@ -60,7 +60,7 @@ namespace qgl
         void set_title(const std::string& value);
         
         /**
-         * Get the window title.
+         * Get the GraphicSystem title.
          **/
         std::string get_title() const;
     
@@ -68,8 +68,8 @@ namespace qgl
         SdlSentry sdl_sentry;
     
         // prevent implicit copy
-        Window(const Window&);
-        const Window& operator = (const Window&);
+        GraphicSystem(const GraphicSystem&);
+        const GraphicSystem& operator = (const GraphicSystem&);
     };
 }
 

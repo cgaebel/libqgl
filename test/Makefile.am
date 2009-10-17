@@ -27,6 +27,6 @@ INCLUDES = -I$(top_srcdir)/include/qgl @SDL_CFLAGS@
 
 unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @UT_LIBS@
 
-unittests_SOURCES = main.cpp WindowTest.cpp StringTest.cpp
+unittests_SOURCES = main.cpp GraphicSystemTest.cpp StringTest.cpp
 
 TESTS = unittests

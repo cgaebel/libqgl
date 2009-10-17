@@ -18,7 +18,7 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "Window.h"
+#include "GraphicSystem.h"
 
 #include <stdexcept>
 #include <SDL.h>
@@ -29,13 +29,13 @@
 namespace qgl
 {
 //------------------------------------------------------------------------------
-    Window::Window()
+    GraphicSystem::GraphicSystem()
     {
         set_video_mode(Vector2ui(800, 600), false);
     }
     
 //------------------------------------------------------------------------------
-    Vector2ui Window::get_size() const
+    Vector2ui GraphicSystem::get_size() const
     {
         SDL_Surface* surface = SDL_GetVideoSurface();
         QGL_ASSERT(surface != NULL);
@@ -43,7 +43,7 @@ namespace qgl
     }
 
 //------------------------------------------------------------------------------
-    bool Window::is_fullscreen() const
+    bool GraphicSystem::is_fullscreen() const
     {
         SDL_Surface* surface = SDL_GetVideoSurface();
         QGL_ASSERT(surface != NULL);
@@ -51,9 +51,9 @@ namespace qgl
     }
     
 //------------------------------------------------------------------------------
-    void Window::set_video_mode(const Vector2ui& size, bool fullscreen)
+    void GraphicSystem::set_video_mode(const Vector2ui& size, bool fullscreen)
     {        
-        QGL_LOG_DETAILS(compose("Resize window to %0 %1.", size, fullscreen ? "(fullscreen)" : ""));
+        QGL_LOG_DETAILS(compose("Resize GraphicSystem to %0 %1.", size, fullscreen ? "(fullscreen)" : ""));
         
         unsigned int flags = SDL_OPENGL;
         if (fullscreen)
@@ -68,13 +68,13 @@ namespace qgl
     }
     
 //------------------------------------------------------------------------------
-    void Window::set_title(const std::string& value)
+    void GraphicSystem::set_title(const std::string& value)
     {
         SDL_WM_SetCaption(value.c_str(), value.c_str());
     }
         
 //------------------------------------------------------------------------------
-    std::string Window::get_title() const
+    std::string GraphicSystem::get_title() const
     {
         char *title;
         SDL_WM_GetCaption(&title, NULL);

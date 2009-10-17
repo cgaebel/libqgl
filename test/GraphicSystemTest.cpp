@@ -20,38 +20,38 @@
 
 #include <UnitTest++/UnitTest++.h>
 
-#include "Window.h"
+#include "GraphicSystem.h"
 
-SUITE(WindowTest)
+SUITE(GraphicSystemTest)
 {
 //------------------------------------------------------------------------------
     TEST(initial_size)
     {
-        qgl::Window window;
-        CHECK_EQUAL(qgl::Vector2ui(800, 600), window.get_size());
+        qgl::GraphicSystem graphic_system;
+        CHECK_EQUAL(qgl::Vector2ui(800, 600), graphic_system.get_size());
     }
     
 //------------------------------------------------------------------------------
-    TEST(initial_is_windowed)
+    TEST(initial_is_graphic_systemed)
     {
-        qgl::Window window;
-        CHECK(!window.is_fullscreen());
+        qgl::GraphicSystem graphic_system;
+        CHECK(!graphic_system.is_fullscreen());
     }
     
 //------------------------------------------------------------------------------
     TEST(set_video_mode)
     {
-        qgl::Window window;
-        window.set_video_mode(qgl::Vector2ui(1280, 1024), true);
-        CHECK_EQUAL(qgl::Vector2ui(1280, 1024), window.get_size());
-        CHECK(window.is_fullscreen());
+        qgl::GraphicSystem graphic_system;
+        graphic_system.set_video_mode(qgl::Vector2ui(1280, 1024), true);
+        CHECK_EQUAL(qgl::Vector2ui(1280, 1024), graphic_system.get_size());
+        CHECK(graphic_system.is_fullscreen());
     }
     
 //------------------------------------------------------------------------------    
     TEST(set_title)
     {
-        qgl::Window window;
-        window.set_title("Mu ha ha ha!");
-        CHECK_EQUAL("Mu ha ha ha!", window.get_title());
+        qgl::GraphicSystem graphic_system;
+        graphic_system.set_title("Mu ha ha ha!");
+        CHECK_EQUAL("Mu ha ha ha!", graphic_system.get_title());
     }
 }
