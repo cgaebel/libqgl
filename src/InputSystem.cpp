@@ -61,6 +61,12 @@ namespace qgl
     {
         return mouse_release_signal;
     }
+
+//------------------------------------------------------------------------------	
+	sigc::signal<void, Vector2ui, Vector2i>& InputSystem::get_mouse_move_signal()
+	{
+		return mouse_move_signal;
+	}
     
 //------------------------------------------------------------------------------
     void InputSystem::process_input()
@@ -102,6 +108,13 @@ namespace qgl
 					Vector2ui pos = Vector2ui(event.button.x, event.button.y);
 					MouseButtonId button = static_cast<MouseButtonId>(event.button.button);					
 					mouse_release_signal.emit(pos, button);
+					break;
+				}
+				case SDL_MOUSEMOTION:
+				{
+					Vector2ui pos = Vector2ui(event.motion.x, event.motion.y);
+					Vector2i dpos = Vector2i(event.motion.xrel, event.motion.yrel);
+					mouse_move_signal.emit(pos, dpos);
 					break;
 				}
             }
@@ -151,7 +164,7 @@ namespace qgl
 //------------------------------------------------------------------------------
     void InputSystem::inject_mouse_press(qgl::Vector2ui pos, qgl::MouseButtonId button)
     {
-        QGL_LOG_DETAILS(compose("Injecting nouse %0 press at %1.", button, pos));
+        QGL_LOG_DETAILS(compose("Injecting mouse %0 press at %1.", button, pos));
         
         SDL_Event event = {0};
         event.type = SDL_MOUSEBUTTONDOWN;
@@ -168,7 +181,7 @@ namespace qgl
 //------------------------------------------------------------------------------
     void InputSystem::inject_mouse_release(qgl::Vector2ui pos, qgl::MouseButtonId button)
     {
-		QGL_LOG_DETAILS(compose("Injecting nouse %0 release at %1.", button, pos));
+		QGL_LOG_DETAILS(compose("Injecting mouse %0 release at %1.", button, pos));
         
         SDL_Event event = {0};
         event.type = SDL_MOUSEBUTTONUP;
@@ -181,5 +194,21 @@ namespace qgl
         
         SDL_PushEvent(&event);
     }
+	
+//------------------------------------------------------------------------------
+	void InputSystem::inject_mouse_move(qgl::Vector2ui pos, qgl::Vector2i dpos)
+	{
+		QGL_LOG_DETAILS(compose("Injecting mouse move to %0 by %1.", pos, dpos));
+        
+        SDL_Event event = {0};
+        event.type = SDL_MOUSEMOTION;
+        event.motion.type = SDL_MOUSEMOTION;
+		event.motion.x = pos(0);
+		event.motion.y = pos(1);
+        event.motion.xrel = dpos(0);
+		event.motion.yrel = dpos(1);
+		
+        SDL_PushEvent(&event);
+	}
 }
 

@@ -107,7 +107,7 @@ SUITE(InputSystemTest)
 		
 		MouseButtonHandler()
 		: press_count(0), release_count(0), 
-          last_button(qgl::NO_MOUSE_BUTTON), last_pos(-1, -1) {}
+          last_button(qgl::NO_MOUSE_BUTTON), last_pos(0, 0) {}
 		
 		void handle_press(qgl::Vector2ui pos, qgl::MouseButtonId button)
 		{
@@ -147,5 +147,38 @@ SUITE(InputSystemTest)
 		CHECK_EQUAL(1, handler.release_count);
 		CHECK_EQUAL(qgl::LEFT_MOUSE_BUTTON, handler.last_button);
 		CHECK_EQUAL(qgl::Vector2ui(30, 50), handler.last_pos);
+	}
+	
+//------------------------------------------------------------------------------
+	struct MouseMotionHandler
+	{
+		unsigned int event_count;
+		qgl::Vector2ui last_pos;
+		qgl::Vector2i last_dpos;
+		
+		MouseMotionHandler()
+		: event_count(0), last_pos(0, 0), last_dpos(0, 0) {}
+		
+		void handle_move(qgl::Vector2ui pos, qgl::Vector2i dpos)
+		{
+			event_count++;
+			last_pos = pos;
+			last_dpos = dpos;
+		}
+	};
+	
+//------------------------------------------------------------------------------
+	TEST(handles_mouse_move)
+	{
+		qgl::InputSystem input_system;
+		MouseMotionHandler handler;
+		input_system.get_mouse_move_signal().connect(sigc::mem_fun(handler, &MouseMotionHandler::handle_move));
+		
+		input_system.inject_mouse_move(qgl::Vector2ui(15, 26), qgl::Vector2i(-1, +2));
+		input_system.process_input();
+		
+		CHECK_EQUAL(1, handler.event_count);
+		CHECK_EQUAL(qgl::Vector2ui(15, 26), handler.last_pos);
+		CHECK_EQUAL(qgl::Vector2i(-1, +2), handler.last_dpos);
 	}
 }

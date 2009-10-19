@@ -71,6 +71,11 @@ namespace qgl
          * Get the mouse release signal.
          **/
         sigc::signal<void, Vector2ui, MouseButtonId>& get_mouse_release_signal();
+		
+		/**
+		 * Get the mouse move signal.
+		 **/
+		sigc::signal<void, Vector2ui, Vector2i>& get_mouse_move_signal();
         
         /**
         * Process pending input.
@@ -101,6 +106,11 @@ namespace qgl
          * Inject mouse release event.
          **/
         void inject_mouse_release(qgl::Vector2ui pos, qgl::MouseButtonId button);
+		
+		/**
+		 * Inject mouse move event.
+		 **/
+		void inject_mouse_move(qgl::Vector2ui pos, qgl::Vector2i dpos);
         
     private:
         SdlSentry sdl_sentry;
@@ -110,6 +120,7 @@ namespace qgl
         sigc::signal<void, KeyId> key_release_signal;
         sigc::signal<void, Vector2ui, MouseButtonId> mouse_press_signal;
         sigc::signal<void, Vector2ui, MouseButtonId> mouse_release_signal;
+		sigc::signal<void, Vector2ui, Vector2i> mouse_move_signal;
         
         InputSystem(const InputSystem&);
         const InputSystem& operator = (const InputSystem&);
