@@ -29,4 +29,6 @@ qgl_include_HEADERS = \
     Engine.h \
     SdlSentry.h \
     GraphicSystem.h \
-	InputSystem.h
+	InputSystem.h \
+	KeyId.h \
+	MouseButtonId.h 

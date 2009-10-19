@@ -23,10 +23,14 @@ check_PROGRAMS = unittests
 ## We use include/qgl instead of only include to enshure that we include
 ## the headers from our package and not those that are installed.
 
-INCLUDES = -I$(top_srcdir)/include @SDL_CFLAGS@
+INCLUDES = -I$(top_srcdir)/include @SDL_CFLAGS@ @SIGC_CFLAGS@
 
-unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @UT_LIBS@
+unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @SIGC_LIBS@ @UT_LIBS@
 
-unittests_SOURCES = main.cpp GraphicSystemTest.cpp StringTest.cpp
+unittests_SOURCES = \
+	main.cpp \
+	GraphicSystemTest.cpp \
+	StringTest.cpp \
+	InputSystemTest.cpp
 
 TESTS = unittests

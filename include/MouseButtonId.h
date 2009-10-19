@@ -18,13 +18,24 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <UnitTest++/UnitTest++.h>
+#ifndef _QGL_MOUSE_BUTTON_ID_H_
+#define _QGL_MOUSE_BUTTON_ID_H_
 
-#include "main.h"
-#include "debug.h"
-
-int main(int argc, char* argv[])
+namespace qgl
 {
-    //qgl::set_log_level(qgl::DETAILS);
-    return UnitTest::RunAllTests();
+    /**
+     * Mouse Button Id
+     **/
+    enum MouseButtonId
+    {
+        NO_MOUSE_BUTTON     = 0,
+        LEFT_MOUSE_BUTTON   = 1,
+        MIDDLE_MOUSE_BUTTON = 2,
+        RIGHT_MOUSE_BUTTON  = 3,
+        MOUSE_WHEEL_UP      = 4,
+        MOUSE_WHEEL_DOWN    = 5
+    };
 }
+
+#endif
+
