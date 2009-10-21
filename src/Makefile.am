@@ -22,7 +22,7 @@ lib_LTLIBRARIES = libqgl.la
 
 INCLUDES = -I$(top_srcdir)/include -DBUILD_QGL @SDL_CFLAGS@ @SIGC_CFLAGS@
 
-libqgl_la_LIBADD = @SDL_LIBS@  @SIGC_LIBS@
+libqgl_la_LIBADD = @SDL_LIBS@  @SIGC_LIBS@ @GL_LIBS@
 
 libqgl_la_LDFLAGS = -version-info @LT_VERSION@
 
@@ -32,4 +32,6 @@ libqgl_la_SOURCES = \
 	Engine.cpp \
 	GraphicSystem.cpp \
 	SdlSentry.cpp \
-	InputSystem.cpp
+	InputSystem.cpp \
+    ColorFormat.cpp \
+	Image.cpp

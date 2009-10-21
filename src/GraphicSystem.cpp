@@ -22,6 +22,7 @@
 
 #include <stdexcept>
 #include <SDL.h>
+#include <GL/glew.h>
 
 #include "debug.h"
 #include "string_utils.h"
@@ -32,6 +33,7 @@ namespace qgl
     GraphicSystem::GraphicSystem()
     {
         set_video_mode(Vector2ui(800, 600), false);
+        glewInit();
     }
     
 //------------------------------------------------------------------------------

@@ -57,8 +57,30 @@ dnl Check for SDL
 
 SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION, :, AC_MSG_ERROR([SDL version $SDL_VERSION not found!]))
+AC_CHECK_LIB([SDL_image], [IMG_Load], SDL_LIBS+=" -lSDL_image", AC_MSG_ERROR([SDL_image not found.]))
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(SDL_LIBS)
+
+dnl Check for openGL
+
+AC_CHECK_LIB([GL], [main], [GL_LIBS="-lGL"], :)
+AC_CHECK_LIB([opengl32], [main], [GL_LIBS="-lopengl32"], :)
+
+AC_CHECK_LIB([GLU], [main], [GL_LIBS+=" -lGLU"], :)
+AC_CHECK_LIB([glu32], [main], [GL_LIBS+=" -lglu32"], :)
+
+dnl FIXME check if the openGL libs where actually found
+dnl TODO add other platform specific libs like MAC
+
+AC_CHECK_LIB([GLEW], [glewInit], [GL_LIBS+=" -lGLEW"])
+AC_CHECK_LIB([glew32], [glewInit], [GL_LIBS+=" -lglew32"])
+AC_CHECK_HEADER([GL/glew.h], :, 
+    AC_MSG_ERROR([Failed to find <GL/glew.h> header.]))
+
+AC_SUBST(GL_LIBS)
+
+
+dnl Check for sigc++
 
 PKG_CHECK_MODULES(SIGC, [sigc++-2.0], :, AC_MSG_ERROR([sigc++ not found!]))
 AC_SUBST(SIGC_CFLAGS)

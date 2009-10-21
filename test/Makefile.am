@@ -25,12 +25,13 @@ check_PROGRAMS = unittests
 
 INCLUDES = -I$(top_srcdir)/include @SDL_CFLAGS@ @SIGC_CFLAGS@
 
-unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @SIGC_LIBS@ @UT_LIBS@
+unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @SIGC_LIBS@ @GL_LIBS@ @UT_LIBS@ 
 
 unittests_SOURCES = \
 	main.cpp \
 	GraphicSystemTest.cpp \
 	StringTest.cpp \
-	InputSystemTest.cpp
+	InputSystemTest.cpp \
+	ImageTest.cpp
 
 TESTS = unittests

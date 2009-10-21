@@ -31,4 +31,8 @@ qgl_include_HEADERS = \
     GraphicSystem.h \
 	InputSystem.h \
 	KeyId.h \
-	MouseButtonId.h 
+	MouseButtonId.h \
+	SmartPtr.h \
+    ColorFormat.h \
+	Image.h
+	
