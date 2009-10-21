@@ -105,6 +105,36 @@ namespace qgl
         : Vector<2, T>(orig) {}
     };
     
+    typedef Vector2<int> Vector2i;
+    typedef Vector2<unsigned int> Vector2ui;    
+    typedef Vector2<float> Vector2f;
+    typedef Vector2<double> Vector2d;
+    
+    /**
+     * Specialisation for Vector2
+     **/
+    template <typename T>
+    class Vector3 : public Vector<3, T>
+    {
+    public:
+        Vector3() {}
+        
+        Vector3(T x, T y, T z)
+        {
+            Vector<3, T>::data[0] = x;
+            Vector<3, T>::data[1] = y;
+            Vector<3, T>::data[2] = z;
+        }
+        
+        Vector3(const Vector<3, T>& orig)
+        : Vector<3, T>(orig) {}
+    };
+    
+    typedef Vector3<int> Vector3i;
+    typedef Vector3<unsigned int> Vector3ui;    
+    typedef Vector3<float> Vector3f;
+    typedef Vector3<double> Vector3d;
+    
     /**
      * Is equal operator for Vector.
      **/
@@ -149,10 +179,7 @@ namespace qgl
         return os;
     }
     
-    typedef Vector2<int> Vector2i;
-    typedef Vector2<unsigned int> Vector2ui;    
-    typedef Vector2<float> Vector2f;
-    typedef Vector2<double> Vector2d;
+
 }
 
 #endif

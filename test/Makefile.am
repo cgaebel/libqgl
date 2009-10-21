@@ -32,6 +32,7 @@ unittests_SOURCES = \
 	GraphicSystemTest.cpp \
 	StringTest.cpp \
 	InputSystemTest.cpp \
-	ImageTest.cpp
+	ImageTest.cpp \
+    FontTest.cpp
 
 TESTS = unittests

@@ -58,6 +58,7 @@ dnl Check for SDL
 SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION, :, AC_MSG_ERROR([SDL version $SDL_VERSION not found!]))
 AC_CHECK_LIB([SDL_image], [IMG_Load], SDL_LIBS+=" -lSDL_image", AC_MSG_ERROR([SDL_image not found.]))
+AC_CHECK_LIB([SDL_ttf], [TTF_Init], SDL_LIBS+=" -lSDL_ttf", AC_MSG_ERROR([SDL_ttf not found.]))
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(SDL_LIBS)
 

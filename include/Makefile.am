@@ -34,5 +34,7 @@ qgl_include_HEADERS = \
 	MouseButtonId.h \
 	SmartPtr.h \
     ColorFormat.h \
-	Image.h
+	Image.h \
+    Font.h \
+    utils.h
 	

@@ -34,4 +34,6 @@ libqgl_la_SOURCES = \
 	SdlSentry.cpp \
 	InputSystem.cpp \
     ColorFormat.cpp \
-	Image.cpp
+	Image.cpp \
+    Font.cpp \
+    utils.cpp
