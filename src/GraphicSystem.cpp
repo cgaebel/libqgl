@@ -86,6 +86,8 @@ namespace qgl
 //------------------------------------------------------------------------------	
 	void GraphicSystem::refresh_screen()
 	{
-	
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        SDL_GL_SwapBuffers();
 	}
 }
