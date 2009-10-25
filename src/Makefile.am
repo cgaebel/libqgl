@@ -28,6 +28,8 @@ libqgl_la_LDFLAGS = -version-info @LT_VERSION@
 
 libqgl_la_SOURCES = \
 	debug.cpp \
+    utils.cpp \
+    opengl_utils.cpp \
 	math_utils.cpp \
 	Engine.cpp \
 	GraphicSystem.cpp \
@@ -36,4 +38,7 @@ libqgl_la_SOURCES = \
     ColorFormat.cpp \
 	Image.cpp \
     Font.cpp \
-    utils.cpp
+    Screen.cpp \
+    Widget.cpp \
+    Label.cpp \
+    Button.cpp 

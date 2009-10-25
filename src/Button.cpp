@@ -18,40 +18,19 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "SdlSentry.h"
-
-#include <stdexcept>
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include "Button.h"
 
 namespace qgl
 {
-    unsigned int SdlSentry::use_count = 0;
-
 //------------------------------------------------------------------------------
-    SdlSentry::SdlSentry()
+    sigc::signal<void>& Button::get_click_signal()
     {
-        if (use_count == 0)
-        {
-            if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-            {
-                throw std::runtime_error(SDL_GetError());
-            }
-            if (TTF_Init() != 0)
-            {
-                throw std::runtime_error(TTF_GetError());
-            }
-        }
-        use_count++;
+        return click_signal;
     }
-        
+    
 //------------------------------------------------------------------------------
-    SdlSentry::~SdlSentry()
+    void Button::inject_mouse_button_release(MouseButtonId button, Vector2f pos)
     {
-        use_count--;
-        if (use_count == 0)
-        {
-            SDL_Quit();
-        }
+        click_signal.emit();
     }
 }

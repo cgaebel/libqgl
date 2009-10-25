@@ -24,6 +24,8 @@ qgl_include_HEADERS = \
     defines.h \
 	main.h \
     debug.h \
+    utils.h \
+    opengl_utils.h \
     math_utils.h \
     Vector.h \
     Engine.h \
@@ -36,5 +38,7 @@ qgl_include_HEADERS = \
     ColorFormat.h \
 	Image.h \
     Font.h \
-    utils.h
-	
+	Screen.h \
+    Widget.h \
+    Label.h \
+    Button.h

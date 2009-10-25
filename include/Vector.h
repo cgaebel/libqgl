@@ -54,6 +54,18 @@ namespace qgl
         }
         
         /**
+         * Conversin constructor
+         **/
+        template <typename U>
+        Vector(const Vector<N, U>& other)
+        {
+            for (unsigned int i = 0; i < N; i++)
+            {
+                data[i] = other(i);
+            }
+        }
+        
+        /**
          * Destructor
          **/
         ~Vector() {}
@@ -93,7 +105,7 @@ namespace qgl
     class Vector2 : public Vector<2, T>
     {
     public:
-        Vector2() {}
+        Vector2() {}                    
         
         Vector2(T x, T y)
         {
@@ -102,6 +114,10 @@ namespace qgl
         }
         
         Vector2(const Vector<2, T>& orig)
+        : Vector<2, T>(orig) {}
+        
+        template <typename U>
+        Vector2(const Vector<2, U>& orig)
         : Vector<2, T>(orig) {}
     };
     
@@ -127,6 +143,10 @@ namespace qgl
         }
         
         Vector3(const Vector<3, T>& orig)
+        : Vector<3, T>(orig) {}
+        
+        template <typename U>
+        Vector3(const Vector<3, U>& orig)
         : Vector<3, T>(orig) {}
     };
     
@@ -177,6 +197,34 @@ namespace qgl
         }
         os << ")";
         return os;
+    }
+    
+    /**
+     * Vector addition
+     **/
+    template <unsigned int N, typename T>
+    Vector<N, T> operator + (const Vector<N, T>& a, const Vector<N, T>& b)
+    {
+        Vector<N, T> result;
+        for (unsigned int i = 0; i < N; i++)
+        {
+            result(i) = a(i) + b(i);
+        }
+        return result;
+    }
+    
+    /**
+     * Vector subtraction
+     **/
+    template <unsigned int N, typename T>
+    Vector<N, T> operator - (const Vector<N, T>& a, const Vector<N, T>& b)
+    {
+        Vector<N, T> result;
+        for (unsigned int i = 0; i < N; i++)
+        {
+            result(i) = a(i) - b(i);
+        }
+        return result;
     }
     
 

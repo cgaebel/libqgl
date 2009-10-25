@@ -18,40 +18,33 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "SdlSentry.h"
+#ifndef _QGL_BUTTON_H_
+#define _QGL_BUTTON_H_
 
-#include <stdexcept>
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include <sigc++/sigc++.h>
+
+#include "defines.h"
+#include "Label.h"
 
 namespace qgl
 {
-    unsigned int SdlSentry::use_count = 0;
-
-//------------------------------------------------------------------------------
-    SdlSentry::SdlSentry()
+    /**
+     * Button
+     **/
+    class QGL_EXPORT Button : public Label
     {
-        if (use_count == 0)
-        {
-            if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-            {
-                throw std::runtime_error(SDL_GetError());
-            }
-            if (TTF_Init() != 0)
-            {
-                throw std::runtime_error(TTF_GetError());
-            }
-        }
-        use_count++;
-    }
+    public:
+        /**
+         * Get the signal that is emitted when clicked.
+         **/
+        sigc::signal<void>& get_click_signal();
         
-//------------------------------------------------------------------------------
-    SdlSentry::~SdlSentry()
-    {
-        use_count--;
-        if (use_count == 0)
-        {
-            SDL_Quit();
-        }
-    }
+        virtual void inject_mouse_button_release(MouseButtonId button, Vector2f pos);
+        
+    private:
+        sigc::signal<void> click_signal;
+    };
 }
+
+#endif
+
