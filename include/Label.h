@@ -67,7 +67,7 @@ namespace qgl
          **/
         void set_text(const std::string& value);
         
-        virtual void draw() const;
+        virtual void draw(GraphicSystem& graphic_system) const;
         
     private:
         Font font;

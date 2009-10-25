@@ -28,6 +28,8 @@
 
 namespace qgl
 {
+    class Image;
+
     /**
      * Graphic System
      *
@@ -79,6 +81,46 @@ namespace qgl
          * Get the signal that is emited to draw the frame.
          **/
         sigc::signal<void>& get_draw_signal();
+        
+        /**
+         * Setup 2d orthographic projection.
+         **/
+        virtual void set_ortho2d(float left,  float right, float bottom, float top) = 0;
+        
+        /**
+         * Set the current color.
+         **/
+        virtual void set_color(const Vector3f& color) = 0;
+        
+        /**
+         * Bind a image.
+         **/
+        virtual void bind_image(const Image& image) = 0;
+        
+        /**
+         * Draw a rectangle.
+         **/
+        virtual void draw_rectangle(Vector2f& pos, Vector2f& size) = 0;
+        
+        /**
+         * Enable blending
+         **/
+        virtual void enable_blending() = 0;
+        
+        /**
+         * Disable blending.
+         **/
+        virtual void disable_blending() = 0;
+        
+        /**
+         * Enable lighting
+         **/
+        virtual void enable_lighting() = 0;
+        
+        /**
+         * Disable lighting.
+         **/
+        virtual void disable_lighting() = 0;
     
     protected:
         sigc::signal<void> draw_signal;

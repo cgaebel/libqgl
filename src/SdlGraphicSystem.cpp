@@ -26,6 +26,7 @@
 
 #include "debug.h"
 #include "string_utils.h"
+#include "Image.h"
 
 namespace qgl
 {
@@ -95,4 +96,76 @@ namespace qgl
         
         SDL_GL_SwapBuffers();
 	}
+
+//------------------------------------------------------------------------------    
+    void SdlGraphicSystem::set_ortho2d(float left,  float right, float bottom, float top)
+    {
+        glMatrixMode(GL_PROJECTION);  
+        glLoadIdentity();
+        gluOrtho2D(left, right, bottom, top);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+    }
+    
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::set_color(const Vector3f& color) 
+    {
+        glColor3f(color(0), color(1), color(2));
+    }
+        
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::bind_image(const Image& image) 
+    {
+        // REVIEW: Yea, this is kinda not the way it should go,
+        // but since Image just works, we will leve it for now.
+        image.bind();
+    }
+    
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::draw_rectangle(Vector2f& pos, Vector2f& size) 
+    {
+        glBegin(GL_QUADS);
+          glNormal3f(0.0f, 0.0f, 1.0f);
+          
+          glTexCoord2f(0.0f, 0.0f);
+          glVertex3f(pos(0), pos(1), 0.0f);
+          
+          glTexCoord2f(1.0f, 0.0f);
+          glVertex3f(pos(0) + size(0), pos(1), 0.0f);
+          
+          glTexCoord2f(1.0f, 1.0f);
+          glVertex3f(pos(0) + size(0), pos(1) + size(1), 0.0f);
+          
+          glTexCoord2f(0.0f, 1.0f);
+          glVertex3f(pos(0), pos(1) + size(1), 0.0f);
+        glEnd();
+    }
+    
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::enable_blending() 
+    {
+        // REVIEW: Do need to set the blend function? Is it even the right thing
+        // to do?
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
+    
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::disable_blending() 
+    {
+        glDisable(GL_BLEND);
+    }
+    
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::enable_lighting() 
+    {
+        glEnable(GL_LIGHTING);
+    }
+    
+//------------------------------------------------------------------------------
+    void SdlGraphicSystem::disable_lighting() 
+    {
+        glDisable(GL_LIGHTING);
+    }
 }

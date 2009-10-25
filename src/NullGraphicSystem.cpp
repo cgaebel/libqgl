@@ -65,4 +65,28 @@ namespace qgl
 	{
         draw_signal.emit();        
 	}
+
+//------------------------------------------------------------------------------    
+    void NullGraphicSystem::set_ortho2d(float left,  float right, float bottom, float top) {}
+    
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::set_color(const Vector3f& color) {}
+        
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::bind_image(const Image& image) {}
+    
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::draw_rectangle(Vector2f& pos, Vector2f& size) {}
+    
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::enable_blending() {}
+    
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::disable_blending() {}
+    
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::enable_lighting() {}
+    
+//------------------------------------------------------------------------------
+    void NullGraphicSystem::disable_lighting() {}
 }

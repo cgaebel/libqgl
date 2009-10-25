@@ -20,9 +20,7 @@
 
 #include "Label.h"
 
-#include <GL/glew.h>
-
-#include "opengl_utils.h"
+#include "GraphicSystem.h"
 
 namespace qgl
 {
@@ -65,23 +63,21 @@ namespace qgl
     }
     
 //------------------------------------------------------------------------------
-    void Label::draw() const
+    void Label::draw(GraphicSystem& graphic_system) const
     {
         if (imgs.empty())
             imgs = font.render_multiline(text);
         
-        glColor3f(1.0f, 1.0f, 1.0f);
-        
+        graphic_system.set_color(Vector3f(1.0f, 1.0f, 1.0f));
         Vector2f pos = position;
         for (unsigned int i = 0; i < imgs.size(); i++)
         {
-             Vector2f size = Vector2f(imgs[i].get_width(), imgs[i].get_height());
-        
-             imgs[i].bind();   
-             glDrawRectangle(pos(0), pos(1), size(0), size(1));
-             imgs[i].unbind();
-             
-             pos(1) += imgs[i].get_height();
+            Vector2f size = Vector2f(imgs[i].get_width(), imgs[i].get_height());
+            
+            graphic_system.bind_image(imgs[i]);
+            graphic_system.draw_rectangle(pos, size);
+ 
+            pos(1) += imgs[i].get_height();
         }
     }
 }

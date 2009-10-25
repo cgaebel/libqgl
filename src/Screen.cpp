@@ -21,11 +21,10 @@
 #include "Screen.h"
 
 #include <algorithm>
-#include <GL/glew.h>
-#include <GL/glu.h>
 
 #include "debug.h"
 #include "Widget.h"
+#include "GraphicSystem.h"
 
 namespace qgl
 {
@@ -86,22 +85,16 @@ namespace qgl
     }
     
 //------------------------------------------------------------------------------
-    void Screen::draw() const
-    {
-        glMatrixMode(GL_PROJECTION);        
-        glLoadIdentity();
-        gluOrtho2D(0.0f, size(0), size(1), 0.0f);
+    void Screen::draw(GraphicSystem& graphic_system) const
+    {        
+        graphic_system.set_ortho2d(0.0f, size(0), size(1), 0.0f);
         
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDisable(GL_LIGHTING);
+        graphic_system.enable_blending();
+        graphic_system.disable_lighting();
         
         for (unsigned int i = 0; i < widgets.size(); i++)
         {
-            widgets[i]->draw();
+            widgets[i]->draw(graphic_system);
         }
     }
     

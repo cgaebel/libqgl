@@ -32,6 +32,7 @@
 namespace qgl
 {
     class Widget;
+    class GraphicSystem;
 
     /**
      * Scene
@@ -87,7 +88,7 @@ namespace qgl
         /**
          * Draw the screen.
          **/
-        virtual void draw() const;
+        virtual void draw(GraphicSystem& graphic_system) const;
                
         virtual void inject_key_press(KeyId key);    
         virtual void inject_key_release(KeyId key);        

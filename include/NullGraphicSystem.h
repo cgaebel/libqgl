@@ -49,6 +49,19 @@ namespace qgl
         virtual std::string get_title() const;
         
 		virtual void draw_frame();
+        
+        virtual void set_ortho2d(float left,  float right, float bottom, float top);
+        
+        virtual void set_color(const Vector3f& color);
+        
+        virtual void bind_image(const Image& image);
+        
+        virtual void draw_rectangle(Vector2f& pos, Vector2f& size);
+        
+        virtual void enable_blending();
+        virtual void disable_blending();
+        virtual void enable_lighting();
+        virtual void disable_lighting();
     
     private:
         Vector2ui size;

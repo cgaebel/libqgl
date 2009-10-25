@@ -126,7 +126,7 @@ namespace qgl
     {
         if (screen != NULL)
         {
-            screen->draw();
+            screen->draw(*graphic_system);
         }
     }
     

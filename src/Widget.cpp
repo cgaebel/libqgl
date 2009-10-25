@@ -86,7 +86,7 @@ namespace qgl
     }
     
 //------------------------------------------------------------------------------
-    void Widget::draw() const {}
+    void Widget::draw(GraphicSystem& graphic_system) const {}
         
 //------------------------------------------------------------------------------
     void Widget::inject_key_press(KeyId key) {}
