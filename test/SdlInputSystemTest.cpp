@@ -20,9 +20,9 @@
 
 #include <UnitTest++/UnitTest++.h>
 
-#include "InputSystem.h"
+#include "SdlInputSystem.h"
 
-SUITE(InputSystemTest)
+SUITE(SdlInputSystemTest)
 {
 //------------------------------------------------------------------------------
 	struct QuitHandler
@@ -41,7 +41,7 @@ SUITE(InputSystemTest)
 //------------------------------------------------------------------------------
 	TEST(handles_quit_event)
 	{
-		qgl::InputSystem input_system;
+		qgl::SdlInputSystem input_system;
 		QuitHandler handler;
 		input_system.get_quit_signal().connect(sigc::mem_fun(handler, &QuitHandler::handle));
 		
@@ -77,7 +77,7 @@ SUITE(InputSystemTest)
 //------------------------------------------------------------------------------
 	TEST(handles_keys)
 	{
-		qgl::InputSystem input_system;
+		qgl::SdlInputSystem input_system;
 		KeyHandler handler;
 		input_system.get_key_press_signal().connect(sigc::mem_fun(handler, &KeyHandler::handle_press));
 		input_system.get_key_release_signal().connect(sigc::mem_fun(handler, &KeyHandler::handle_release));
@@ -127,7 +127,7 @@ SUITE(InputSystemTest)
 //------------------------------------------------------------------------------
 	TEST(handles_mouse_buttons)
 	{
-		qgl::InputSystem input_system;
+		qgl::SdlInputSystem input_system;
 		MouseButtonHandler handler;
 		input_system.get_mouse_press_signal().connect(sigc::mem_fun(handler, &MouseButtonHandler::handle_press));
 		input_system.get_mouse_release_signal().connect(sigc::mem_fun(handler, &MouseButtonHandler::handle_release));
@@ -170,7 +170,7 @@ SUITE(InputSystemTest)
 //------------------------------------------------------------------------------
 	TEST(handles_mouse_move)
 	{
-		qgl::InputSystem input_system;
+		qgl::SdlInputSystem input_system;
 		MouseMotionHandler handler;
 		input_system.get_mouse_move_signal().connect(sigc::mem_fun(handler, &MouseMotionHandler::handle_move));
 		

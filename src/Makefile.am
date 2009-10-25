@@ -32,9 +32,13 @@ libqgl_la_SOURCES = \
     opengl_utils.cpp \
 	math_utils.cpp \
 	Engine.cpp \
-	GraphicSystem.cpp \
-	SdlSentry.cpp \
-	InputSystem.cpp \
+    GraphicSystem.cpp \
+    InputSystem.cpp \
+    SdlSentry.cpp \
+	SdlGraphicSystem.cpp \
+	SdlInputSystem.cpp \
+    NullInputSystem.cpp \
+    NullGraphicSystem.cpp \
     ColorFormat.cpp \
 	Image.cpp \
     Font.cpp \

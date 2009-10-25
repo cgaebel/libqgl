@@ -20,21 +20,29 @@
 
 #include "Engine.h"
 
-#include "GraphicSystem.h"
-#include "InputSystem.h"
+#include "SdlGraphicSystem.h"
+#include "SdlInputSystem.h"
+#include "Screen.h"
 
 namespace qgl
 {
 //-----------------------------------------------------------------------------
     Engine::Engine()
     : running(false),
-	  graphic_system(NULL), input_system(NULL)
-	{
-		graphic_system = new GraphicSystem;
-		input_system = new InputSystem;
-		
-		input_system->get_quit_signal().connect(sigc::mem_fun(this, &Engine::on_quit));
+	  graphic_system(new SdlGraphicSystem), input_system(new SdlInputSystem), 
+      screen(NULL)
+	{				
+        init();
 	}
+
+//-----------------------------------------------------------------------------    
+    Engine::Engine(GraphicSystem* gs, InputSystem* is)
+    : running(false),
+	  graphic_system(gs), input_system(is), 
+      screen(NULL)
+    {
+        init();
+    }
         
 //-----------------------------------------------------------------------------
     Engine::~Engine()
@@ -55,7 +63,7 @@ namespace qgl
 			// compute simulation
 			
 			if (graphic_system != NULL)
-				graphic_system->refresh_screen();
+				graphic_system->draw_frame();
             
             // whait on next frame
         }
@@ -86,10 +94,47 @@ namespace qgl
 		QGL_ASSERT(input_system != NULL);
 		return *input_system;
 	}
+    
+//-----------------------------------------------------------------------------
+    void Engine::set_screen(Screen& s)
+    {
+        screen = &s;
+    }
+
+//-----------------------------------------------------------------------------
+    Screen& Engine::get_screen()
+    {
+        QGL_ASSERT(screen != NULL);
+        return *screen;
+    }
+    
+//-----------------------------------------------------------------------------
+    const Screen& Engine::get_screen() const
+    {
+        QGL_ASSERT(screen != NULL);
+        return *screen;
+    }
 	
 //-----------------------------------------------------------------------------
 	void Engine::on_quit()
 	{
 		stop();
 	}		
+    
+//-----------------------------------------------------------------------------
+    void Engine::on_draw()
+    {
+        if (screen != NULL)
+        {
+            screen->draw();
+        }
+    }
+    
+//-----------------------------------------------------------------------------
+    void Engine::init()
+    {
+        input_system->get_quit_signal().connect(sigc::mem_fun(this, &Engine::on_quit));
+        graphic_system->get_draw_signal().connect(sigc::mem_fun(this, &Engine::on_draw));
+    }
 }
+

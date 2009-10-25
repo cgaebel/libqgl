@@ -18,12 +18,13 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef _QGL_GRAPHICSYSTEM_H_
-#define _QGL_GRAPHICSYSTEM_H_
+#ifndef _QGL_GRAPHIC_SYSTEM_H_
+#define _QGL_GRAPHIC_SYSTEM_H_
+
+#include <sigc++/signal.h>
 
 #include "defines.h"
 #include "Vector.h"
-#include "SdlSentry.h"
 
 namespace qgl
 {
@@ -40,38 +41,49 @@ namespace qgl
         GraphicSystem();
         
         /**
+         * Destructor
+         **/
+        virtual ~GraphicSystem();
+        
+        /**
          * Get the GraphicSystem size.
          **/
-        Vector2ui get_size() const;
+        virtual Vector2ui get_size() const = 0;
         
         /**
          * Check if the GraphicSystem is fullscreen
          **/
-        bool is_fullscreen() const;
+        virtual bool is_fullscreen() const = 0;
         
         /**
          * Set the video mode.
          **/
-        void set_video_mode(const Vector2ui& size, bool fullscreen);
+        virtual void set_video_mode(const Vector2ui& size, bool fullscreen) = 0;
         
         /**
          * Set title.
          **/
-        void set_title(const std::string& value);
+        virtual void set_title(const std::string& value) = 0;
         
         /**
          * Get the GraphicSystem title.
          **/
-        std::string get_title() const;
+        virtual std::string get_title() const = 0;
 		
 		/**
 		 * Refresh the screen.
 		 **/
-		void refresh_screen();
+		virtual void draw_frame() = 0;
+        
+        /**
+         * Get the signal that is emited to draw the frame.
+         **/
+        sigc::signal<void>& get_draw_signal();
     
-    private:
-        SdlSentry sdl_sentry;
+    protected:
+        sigc::signal<void> draw_signal;
     
+    private:  
         // prevent implicit copy
         GraphicSystem(const GraphicSystem&);
         const GraphicSystem& operator = (const GraphicSystem&);

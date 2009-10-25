@@ -20,28 +20,28 @@
 
 #include <UnitTest++/UnitTest++.h>
 
-#include "GraphicSystem.h"
+#include "SdlGraphicSystem.h"
 
-SUITE(GraphicSystemTest)
+SUITE(SdlGraphicSystemTest)
 {
 //------------------------------------------------------------------------------
     TEST(initial_size)
     {
-        qgl::GraphicSystem graphic_system;
+        qgl::SdlGraphicSystem graphic_system;
         CHECK_EQUAL(qgl::Vector2ui(800, 600), graphic_system.get_size());
     }
     
 //------------------------------------------------------------------------------
     TEST(initial_is_graphic_systemed)
     {
-        qgl::GraphicSystem graphic_system;
+        qgl::SdlGraphicSystem graphic_system;
         CHECK(!graphic_system.is_fullscreen());
     }
     
 //------------------------------------------------------------------------------
     TEST(set_video_mode)
     {
-        qgl::GraphicSystem graphic_system;
+        qgl::SdlGraphicSystem graphic_system;
         graphic_system.set_video_mode(qgl::Vector2ui(1280, 1024), true);
         CHECK_EQUAL(qgl::Vector2ui(1280, 1024), graphic_system.get_size());
         CHECK(graphic_system.is_fullscreen());
@@ -50,7 +50,7 @@ SUITE(GraphicSystemTest)
 //------------------------------------------------------------------------------    
     TEST(set_title)
     {
-        qgl::GraphicSystem graphic_system;
+        qgl::SdlGraphicSystem graphic_system;
         graphic_system.set_title("Mu ha ha ha!");
         CHECK_EQUAL("Mu ha ha ha!", graphic_system.get_title());
     }

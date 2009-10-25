@@ -27,6 +27,7 @@ namespace qgl
 {
 	class GraphicSystem;
 	class InputSystem;
+    class Screen;
 
     /**
      * Engine
@@ -41,6 +42,11 @@ namespace qgl
          * Constructor
          **/
         Engine();
+        
+        /**
+         * Constructor with specific systems.
+         **/
+        Engine(GraphicSystem* graphic_system, InputSystem* input_system);
         
         /**
          * Destructor
@@ -71,15 +77,34 @@ namespace qgl
 		 * Get the input system.
 		 **/
 		InputSystem& get_input_system();
+        
+        /**
+         * Set the currently active screen.
+         **/
+        void set_screen(Screen& screen);
+        
+        /**
+         * Get the currently active screen.
+         *
+         * @{
+         **/
+        Screen& get_screen();
+        const Screen& get_screen() const;
+        /** @} **/
 	
 	protected:
 		virtual void on_quit();
+        virtual void on_draw();
 		
     private:
         bool running;
 		
 		GraphicSystem* graphic_system;
-		InputSystem* input_system;        
+		InputSystem* input_system;
+
+        Screen* screen;
+        
+        void init();
 		
         // prevent implicit copy
         Engine(const Engine&);

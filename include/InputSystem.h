@@ -24,7 +24,6 @@
 #include <sigc++/signal.h>
 
 #include "defines.h"
-#include "SdlSentry.h"
 #include "KeyId.h"
 #include "MouseButtonId.h"
 #include "Vector.h"
@@ -38,14 +37,14 @@ namespace qgl
     {
     public:
         /**
-        * Constructor
-        **/
+         * Constructor
+         **/
         InputSystem();
-        
+    
         /**
         * Destructor
         **/
-        ~InputSystem();
+        virtual ~InputSystem();
         
         /** 
         * Get the quit signal.
@@ -53,13 +52,13 @@ namespace qgl
         sigc::signal<void>& get_quit_signal();
         
         /**
-        * Get the key press signal.
-        **/
+         * Get the key press signal.
+         **/
         sigc::signal<void, KeyId>& get_key_press_signal();
         
         /**
-        * Get the key release signal.
-        **/
+         * Get the key release signal.
+         **/
         sigc::signal<void, KeyId>& get_key_release_signal();
         
         /**
@@ -78,50 +77,49 @@ namespace qgl
 		sigc::signal<void, Vector2ui, Vector2i>& get_mouse_move_signal();
         
         /**
-        * Process pending input.
-        **/
-        void process_input();
+         * Process pending input.
+         **/
+        virtual void process_input() = 0;
         
         /**
-        * Inject Quit Event
-        **/
-        void inject_quit();
+         * Inject Quit Event
+         **/
+        virtual void inject_quit() = 0;
         
         /**
-        * Inject key press event.
-        **/
-        void inject_key_press(qgl::KeyId key);
+         * Inject key press event.
+         **/
+        virtual void inject_key_press(qgl::KeyId key) = 0;
         
         /**
-        * Inject key release event.
-        **/
-        void inject_key_release(qgl::KeyId key);
+         * Inject key release event.
+         **/
+        virtual void inject_key_release(qgl::KeyId key) = 0;
         
         /**
          * Inject mouse press event.
          **/
-        void inject_mouse_press(qgl::Vector2ui pos, qgl::MouseButtonId button);
+        virtual void inject_mouse_press(qgl::Vector2ui pos, qgl::MouseButtonId button) = 0;
         
         /**
          * Inject mouse release event.
          **/
-        void inject_mouse_release(qgl::Vector2ui pos, qgl::MouseButtonId button);
+        virtual void inject_mouse_release(qgl::Vector2ui pos, qgl::MouseButtonId button) = 0;
 		
 		/**
 		 * Inject mouse move event.
 		 **/
-		void inject_mouse_move(qgl::Vector2ui pos, qgl::Vector2i dpos);
+		virtual void inject_mouse_move(qgl::Vector2ui pos, qgl::Vector2i dpos) = 0;
         
-    private:
-        SdlSentry sdl_sentry;
-        
+    protected:
         sigc::signal<void> quit_signal;
         sigc::signal<void, KeyId> key_press_signal;
         sigc::signal<void, KeyId> key_release_signal;
         sigc::signal<void, Vector2ui, MouseButtonId> mouse_press_signal;
         sigc::signal<void, Vector2ui, MouseButtonId> mouse_release_signal;
 		sigc::signal<void, Vector2ui, Vector2i> mouse_move_signal;
-        
+    
+    private:    
         InputSystem(const InputSystem&);
         const InputSystem& operator = (const InputSystem&);
     };

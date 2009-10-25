@@ -18,51 +18,51 @@
 // along with libqgl. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "InputSystem.h"
-
-#include <SDL.h>
+#include "NullGraphicSystem.h"
 
 namespace qgl
 {
 //------------------------------------------------------------------------------
-    InputSystem::InputSystem() {}
+    NullGraphicSystem::NullGraphicSystem()
+    : size(800, 600), fullscreen(false) {}
+
+//------------------------------------------------------------------------------
+    NullGraphicSystem::~NullGraphicSystem() {}
     
 //------------------------------------------------------------------------------
-    InputSystem::~InputSystem() {}
-    
-//------------------------------------------------------------------------------
-    sigc::signal<void>& InputSystem::get_quit_signal()
+    Vector2ui NullGraphicSystem::get_size() const
     {
-        return quit_signal;
+        return size;
     }
 
 //------------------------------------------------------------------------------
-    sigc::signal<void, KeyId>& InputSystem::get_key_press_signal()
+    bool NullGraphicSystem::is_fullscreen() const
     {
-        return key_press_signal;
+        return fullscreen;
     }
     
 //------------------------------------------------------------------------------
-    sigc::signal<void, KeyId>& InputSystem::get_key_release_signal()
-    {
-        return key_release_signal;
+    void NullGraphicSystem::set_video_mode(const Vector2ui& s, bool fs)
+    {        
+        size = s;
+        fullscreen = fs;
     }
     
 //------------------------------------------------------------------------------
-    sigc::signal<void, Vector2ui, MouseButtonId>& InputSystem::get_mouse_press_signal()
+    void NullGraphicSystem::set_title(const std::string& value)
     {
-        return mouse_press_signal;
+        title = value;
     }
-    
+        
 //------------------------------------------------------------------------------
-    sigc::signal<void, Vector2ui, MouseButtonId>& InputSystem::get_mouse_release_signal()
+    std::string NullGraphicSystem::get_title() const
     {
-        return mouse_release_signal;
+        return title;
     }
 
 //------------------------------------------------------------------------------	
-	sigc::signal<void, Vector2ui, Vector2i>& InputSystem::get_mouse_move_signal()
+	void NullGraphicSystem::draw_frame()
 	{
-		return mouse_move_signal;
+        draw_signal.emit();        
 	}
 }

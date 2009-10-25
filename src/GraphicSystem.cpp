@@ -24,70 +24,17 @@
 #include <SDL.h>
 #include <GL/glew.h>
 
-#include "debug.h"
-#include "string_utils.h"
-
 namespace qgl
 {
 //------------------------------------------------------------------------------
-    GraphicSystem::GraphicSystem()
-    {
-        set_video_mode(Vector2ui(800, 600), false);
-        glewInit();
-    }
+    GraphicSystem::GraphicSystem() {}
     
 //------------------------------------------------------------------------------
-    Vector2ui GraphicSystem::get_size() const
-    {
-        SDL_Surface* surface = SDL_GetVideoSurface();
-        QGL_ASSERT(surface != NULL);
-        return Vector2ui(surface->w, surface->h);
-    }
-
-//------------------------------------------------------------------------------
-    bool GraphicSystem::is_fullscreen() const
-    {
-        SDL_Surface* surface = SDL_GetVideoSurface();
-        QGL_ASSERT(surface != NULL);
-        return (surface->flags & SDL_FULLSCREEN) == SDL_FULLSCREEN; 
-    }
+    GraphicSystem::~GraphicSystem() {}
     
 //------------------------------------------------------------------------------
-    void GraphicSystem::set_video_mode(const Vector2ui& size, bool fullscreen)
-    {        
-        QGL_LOG_DETAILS(compose("Resize GraphicSystem to %0 %1.", size, fullscreen ? "(fullscreen)" : ""));
-        
-        unsigned int flags = SDL_OPENGL;
-        if (fullscreen)
-            flags |= SDL_FULLSCREEN;
-        SDL_Surface* surface = SDL_SetVideoMode(size(0), size(1), 0, flags);
-        if (surface == NULL)
-        {
-            std::string msg = SDL_GetError();
-            QGL_LOG_ERROR(msg);
-            throw std::runtime_error(msg);
-        }
-    }
-    
-//------------------------------------------------------------------------------
-    void GraphicSystem::set_title(const std::string& value)
+    sigc::signal<void>& GraphicSystem::get_draw_signal()
     {
-        SDL_WM_SetCaption(value.c_str(), value.c_str());
+        return draw_signal;
     }
-        
-//------------------------------------------------------------------------------
-    std::string GraphicSystem::get_title() const
-    {
-        char *title;
-        SDL_WM_GetCaption(&title, NULL);
-        return title;
-    }
-
-//------------------------------------------------------------------------------	
-	void GraphicSystem::refresh_screen()
-	{
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        SDL_GL_SwapBuffers();
-	}
 }

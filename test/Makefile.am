@@ -29,10 +29,11 @@ unittests_LDADD = $(top_builddir)/src/libqgl.la @SDL_LIBS@ @SIGC_LIBS@ @GL_LIBS@
 
 unittests_SOURCES = \
 	main.cpp \
-	GraphicSystemTest.cpp \
-	StringTest.cpp \
-	InputSystemTest.cpp \
+    StringTest.cpp \
+	SdlGraphicSystemTest.cpp \
+	SdlInputSystemTest.cpp \
 	ImageTest.cpp \
-    FontTest.cpp
+    FontTest.cpp \
+    EngineTest.cpp
 
 TESTS = unittests

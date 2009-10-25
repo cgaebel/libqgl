@@ -29,9 +29,13 @@ qgl_include_HEADERS = \
     math_utils.h \
     Vector.h \
     Engine.h \
-    SdlSentry.h \
     GraphicSystem.h \
 	InputSystem.h \
+    SdlSentry.h \
+    SdlGraphicSystem.h \
+    SdlInputSystem.h \
+    NullGraphicSystem.h \
+    NullInputSystem.h \
 	KeyId.h \
 	MouseButtonId.h \
 	SmartPtr.h \
