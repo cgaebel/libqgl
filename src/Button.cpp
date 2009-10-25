@@ -29,7 +29,7 @@ namespace qgl
     }
     
 //------------------------------------------------------------------------------
-    void Button::inject_mouse_button_release(MouseButtonId button, Vector2f pos)
+    void Button::inject_mouse_release(MouseButtonId button, Vector2f pos)
     {
         click_signal.emit();
     }

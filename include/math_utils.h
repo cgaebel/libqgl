@@ -34,6 +34,13 @@ namespace qgl
     template <> 
     bool equals(double a, double b);
     
+    template <typename T>
+    T rescale(T value, T source, T target)
+    {
+        T fct = target / source;
+        return value * fct;
+    }
+    
 }
 
 #endif

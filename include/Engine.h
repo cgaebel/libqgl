@@ -22,6 +22,8 @@
 #define _QGL_ENGINE_H_
 
 #include "defines.h"
+#include "Vector.h"
+#include "MouseButtonId.h"
 
 namespace qgl
 {
@@ -94,6 +96,10 @@ namespace qgl
 	
 	protected:
 		virtual void on_quit();
+        virtual void on_mouse_press(Vector2ui pos, MouseButtonId button);        
+        virtual void on_mouse_release(Vector2ui pos, MouseButtonId button);
+        virtual void on_mouse_move(Vector2ui pos, Vector2i dpos);
+        
         virtual void on_draw();
 		
     private:

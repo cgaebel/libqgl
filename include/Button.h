@@ -39,7 +39,7 @@ namespace qgl
          **/
         sigc::signal<void>& get_click_signal();
         
-        virtual void inject_mouse_button_release(MouseButtonId button, Vector2f pos);
+        virtual void inject_mouse_release(MouseButtonId button, Vector2f pos);
         
     private:
         sigc::signal<void> click_signal;

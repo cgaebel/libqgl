@@ -227,6 +227,16 @@ namespace qgl
         return result;
     }
     
+    template <unsigned int N, typename T>
+    Vector<N, T> rescale(const Vector<N, T>& value, const Vector<N, T>& source, const Vector<N, T>& target)
+    {
+        Vector<N, T> result;
+        for (unsigned int i = 0; i < N; i++)
+        {
+            result(i) = rescale<T>(value(i), source(i), target(i));
+        }
+        return result;
+    }
 
 }
 

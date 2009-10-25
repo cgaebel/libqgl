@@ -20,6 +20,7 @@
 
 #include "Engine.h"
 
+#include "math_utils.h"
 #include "SdlGraphicSystem.h"
 #include "SdlInputSystem.h"
 #include "Screen.h"
@@ -119,7 +120,41 @@ namespace qgl
 	void Engine::on_quit()
 	{
 		stop();
-	}		
+	}	
+
+//-----------------------------------------------------------------------------
+    void Engine::on_mouse_press(Vector2ui pos, MouseButtonId button)
+    {
+        QGL_ASSERT(graphic_system != NULL);
+        if (screen != NULL)
+        {
+            Vector2f rpos = rescale<2, float>(pos, graphic_system->get_size(), screen->get_size());
+            screen->inject_mouse_press(button, rpos);
+        }
+    }
+    
+//-----------------------------------------------------------------------------
+    void Engine::on_mouse_release(Vector2ui pos, MouseButtonId button)
+    {
+        QGL_ASSERT(graphic_system != NULL);
+        if (screen != NULL)
+        {
+            Vector2f rpos = rescale<2, float>(pos, graphic_system->get_size(), screen->get_size());
+            screen->inject_mouse_release(button, rpos);
+        }
+    }
+    
+//-----------------------------------------------------------------------------
+    void Engine::on_mouse_move(Vector2ui pos, Vector2i dpos)
+    {
+        QGL_ASSERT(graphic_system != NULL);
+        if (screen != NULL)
+        {
+            Vector2f rpos = rescale<2, float>(pos, graphic_system->get_size(), screen->get_size());
+            Vector2f rdpos = rescale<2, float>(dpos, graphic_system->get_size(), screen->get_size());
+            screen->inject_mouse_move(rpos, rdpos);
+        }
+    }
     
 //-----------------------------------------------------------------------------
     void Engine::on_draw()
@@ -134,6 +169,10 @@ namespace qgl
     void Engine::init()
     {
         input_system->get_quit_signal().connect(sigc::mem_fun(this, &Engine::on_quit));
+        input_system->get_mouse_press_signal().connect(sigc::mem_fun(this, &Engine::on_mouse_press));
+        input_system->get_mouse_release_signal().connect(sigc::mem_fun(this, &Engine::on_mouse_release));
+        input_system->get_mouse_move_signal().connect(sigc::mem_fun(this, &Engine::on_mouse_move));
+        
         graphic_system->get_draw_signal().connect(sigc::mem_fun(this, &Engine::on_draw));
     }
 }

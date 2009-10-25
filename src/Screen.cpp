@@ -105,13 +105,7 @@ namespace qgl
     void Screen::inject_key_release(KeyId key) {}        
     
 //------------------------------------------------------------------------------
-    void Screen::inject_mouse_move(Vector2f pos, Vector2f mov) 
-    {
-        
-    }
-    
-//------------------------------------------------------------------------------
-    void Screen::inject_mouse_button_press(MouseButtonId button, Vector2f pos)
+    void Screen::inject_mouse_press(MouseButtonId button, Vector2f pos)
     {
         for (unsigned int i = 0; i < widgets.size(); i++)
         {
@@ -121,13 +115,13 @@ namespace qgl
             if (dpos(0) >= 0.0 && dpos(1) >= 0.0 && 
                 dpos(0) <= wsize(0) && dpos(0) <= wsize(0))
             {            
-                widgets[i]->inject_mouse_button_press(button, dpos);
+                widgets[i]->inject_mouse_press(button, dpos);
             }
         }
     }
     
 //------------------------------------------------------------------------------
-    void Screen::inject_mouse_button_release(MouseButtonId button, Vector2f pos)
+    void Screen::inject_mouse_release(MouseButtonId button, Vector2f pos)
     {
         for (unsigned int i = 0; i < widgets.size(); i++)
         {
@@ -137,8 +131,14 @@ namespace qgl
             if (dpos(0) >= 0.0 && dpos(1) >= 0.0 && 
                 dpos(0) <= wsize(0) && dpos(1) <= wsize(1))
             {            
-                widgets[i]->inject_mouse_button_release(button, dpos);
+                widgets[i]->inject_mouse_release(button, dpos);
             }
         }
+    }
+    
+//------------------------------------------------------------------------------
+    void Screen::inject_mouse_move(Vector2f pos, Vector2f mov) 
+    {
+        
     }
 }

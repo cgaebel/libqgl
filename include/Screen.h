@@ -91,10 +91,10 @@ namespace qgl
         virtual void draw(GraphicSystem& graphic_system) const;
                
         virtual void inject_key_press(KeyId key);    
-        virtual void inject_key_release(KeyId key);        
+        virtual void inject_key_release(KeyId key);                
+        virtual void inject_mouse_press(MouseButtonId button, Vector2f pos);
+        virtual void inject_mouse_release(MouseButtonId button, Vector2f pos);
         virtual void inject_mouse_move(Vector2f pos, Vector2f mov);
-        virtual void inject_mouse_button_press(MouseButtonId button, Vector2f pos);
-        virtual void inject_mouse_button_release(MouseButtonId button, Vector2f pos);
         
     private:
         Vector2f size;

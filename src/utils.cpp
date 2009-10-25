@@ -174,13 +174,6 @@ namespace qgl
     }
 
 //------------------------------------------------------------------------------    
-    QGL_EXPORT float rescale(float value, float source, float target)
-    {
-        float fct = target / source;
-        return value * fct;
-    }
-
-//------------------------------------------------------------------------------    
     QGL_EXPORT std::string read_text_file(const std::string& filename)
     {
         std::ifstream input(filename.c_str());

@@ -95,11 +95,11 @@ namespace qgl
     void Widget::inject_key_release(KeyId key) {}        
     
 //------------------------------------------------------------------------------
+    void Widget::inject_mouse_press(MouseButtonId button, Vector2f pos) {}
+    
+//------------------------------------------------------------------------------
+    void Widget::inject_mouse_release(MouseButtonId button, Vector2f pos) {}
+    
+//------------------------------------------------------------------------------
     void Widget::inject_mouse_move(Vector2f pos, Vector2f mov) {}
-    
-//------------------------------------------------------------------------------
-    void Widget::inject_mouse_button_press(MouseButtonId button, Vector2f pos) {}
-    
-//------------------------------------------------------------------------------
-    void Widget::inject_mouse_button_release(MouseButtonId button, Vector2f pos) {}
 }
